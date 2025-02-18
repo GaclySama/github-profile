@@ -1,0 +1,145 @@
+/* * Background */
+
+.background-container {
+  width: 100%;
+  max-width: 100vw;
+}
+
+.image-background {
+  width: 100%;
+}
+
+
+/* * Search */
+
+.search-input {
+  background-color: #20293A;
+  border-radius: 8px;
+  border: transparent;
+  width: 100%;
+  padding: 8px 5px;
+  display: flex;
+}
+
+.search-container input {
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+  flex-grow: 8;
+  outline: none;
+}
+
+.search-container button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.searched-container {
+  background: linear-gradient(95deg, #111729 3%, #1d1b48 99.61%);
+  border-radius: 8px;
+  border: transparent;
+  width: 100%;
+  padding: 8px 5px;
+  display: flex;
+  align-items: center;
+}
+
+
+
+/* * Github logo */
+
+.git-logo-container {
+  aspect-ratio: 1;
+  background-color: #000000;
+  border-radius: 16px;
+  height: auto;
+  max-width: 120px;        
+  min-width: 70px;        
+  padding: 2px;
+}
+
+
+/* * Pill */
+.pill-container {
+  background-color: #111729;
+  border-radius: 8px;
+  gap: 15px;
+  height: fit-content;
+  margin-bottom: 8px;
+  padding: 15px;
+  width: auto;
+}
+
+.pill-container h4,p {
+  font-size: .75rem;
+  font-weight: 400;
+}
+
+.pill-divider {
+  background-color: aliceblue;
+  height: auto;
+  padding: 0.5px;
+  width: 0.5px;
+}
+
+.column .center {
+  align-items: flex-start;
+  gap: 15px;
+}
+
+
+/* * Card */
+
+.grid-card {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr 1fr;
+  margin: 30px 0px;
+}
+
+.card-container {
+  background: linear-gradient(95deg, #111729 3%, #1d1b48 99.61%);
+  border-radius: 8px;
+  display:flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 10px;
+  padding: 25px;
+}
+
+.card-container div {
+  align-items: center;
+  gap: 10px;
+}
+
+.card-container p {
+  color: #97A3B6;
+  font-size: .75rem;
+  font-weight: 500;
+}
+
+/* * View all repositories */
+
+.second-container:last-child button {
+  align-self: center;
+  background-color: transparent;
+  border: none;
+  color: #CDD5E0;
+  font-size: 1rem;
+  font-weight: 400;
+  width: fit-content;
+  cursor: pointer;
+}
+
+
+
+@media (width < 650px) {
+  .grid-card {
+    grid-template-columns: 1fr;
+  }
+  .search-container {
+    left: 10dvw;
+    right: 10dvw;
+  }
+}
