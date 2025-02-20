@@ -1,19 +1,49 @@
 import { IconSearch } from "./icons/IconSearch";
-import { User } from "./User";
+import { SearchedUsers } from "./SearchedUsers";
+import { useSearch } from "../hooks/useSearch";
+import { User } from "../interfaces/interfaces";
 
-export const SearchBar = () => {
+interface Props {
+  handleCurrentUser: (user: User) => void;
+}
+
+export const SearchBar = ({ handleCurrentUser }: Props) => {
+  const {
+    // Properties
+    inputValue,
+    searchContainerRef,
+    showUsers,
+    users,
+    // Methods
+    handleChange,
+    handleSubmit,
+    setShowUsers,
+  } = useSearch();
+
   return (
     <>
-      <div className="search-container">
-        <div className="search-input">
-          <button>
+      <div className="search-container" ref={searchContainerRef}>
+        <form className="search-input" onSubmit={handleSubmit}>
+          <button type="submit">
             <IconSearch />
           </button>
 
-          <input type="text" />
-        </div>
+          <input
+            type="text"
+            onChange={handleChange}
+            value={inputValue}
+            placeholder="Search user..."
+            onFocus={() => setShowUsers(true)}
+          />
+        </form>
 
-        <User />
+        {showUsers && users.length > 0 && (
+          <SearchedUsers
+            users={users}
+            onSelectUser={() => setShowUsers(false)}
+            handleCurrentUser={handleCurrentUser}
+          />
+        )}
       </div>
     </>
   );

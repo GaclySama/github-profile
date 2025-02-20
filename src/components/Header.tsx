@@ -2,7 +2,7 @@ export const Header = () => {
   return (
     <picture className="background-container">
       <source
-        media="(width < 600px)"
+        media="(max-width: 600px)"
         srcSet="src\assets\hero-image-github-profile-sm.jpg"
       />
 

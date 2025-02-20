@@ -3,10 +3,15 @@
 .background-container {
   width: 100%;
   max-width: 100vw;
+  min-height: 150px;
+  height: 25vh;
 }
 
 .image-background {
   width: 100%;
+  height: 100%;
+  object-fit: cover;   
+  position: absolute;
 }
 
 
@@ -45,8 +50,6 @@
   align-items: center;
 }
 
-
-
 /* * Github logo */
 
 .git-logo-container {
@@ -54,9 +57,15 @@
   background-color: #000000;
   border-radius: 16px;
   height: auto;
-  max-width: 120px;        
-  min-width: 70px;        
+  max-width: 120px; 
   padding: 2px;
+}
+
+.git-logo {
+  aspect-ratio: 1;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
 
 
@@ -139,7 +148,13 @@
     grid-template-columns: 1fr;
   }
   .search-container {
-    left: 10dvw;
-    right: 10dvw;
+    left: 5%;
+    right: 5%;
+  }
+  .second-container {
+    width: 85dvw;
+  }
+  .background-container {
+    height: 20vh;
   }
 }
