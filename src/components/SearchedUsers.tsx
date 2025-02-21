@@ -22,6 +22,7 @@ export const SearchedUsers = ({
       {users.map((user) => (
         <button
           key={user.id}
+          role="option"
           className="searched-container"
           onClick={() => handleSelect(user)}
         >

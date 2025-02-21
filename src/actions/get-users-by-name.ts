@@ -11,14 +11,11 @@ export const getUsersByName = async (name: string): Promise<User[]> => {
       login: user.login,
       id: user.id,
       avatar_url: user.avatar_url,
-      url: user.url,
       html_url: user.html_url,
       followers_url: user.followers_url,
       following_url: user.following_url,
       repos_url: user.repos_url,
     }));
-
-    console.log(users, "Mapeados");
 
     return users;
   } catch (error) {

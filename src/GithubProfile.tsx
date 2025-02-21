@@ -4,7 +4,8 @@ import { IconGitHub } from "./components/icons/IconGithub";
 import { Pill } from "./components/Pill";
 import { Repositories } from "./components/Repositories";
 import { SearchBar } from "./components/SearchBar";
-import { User } from "./interfaces/interfaces";
+import { ReposAPIResponse, User } from "./interfaces/interfaces";
+import { getUserByName } from "./actions/get-user-by-name";
 
 interface UserGitHub {
   name: string;
@@ -17,35 +18,94 @@ interface GitHubData {
   followers: string;
   following: string;
   location: string;
-  repostories: [];
+  repostories: ReposAPIResponse[];
 }
 
-export const GithubProfile = () => {
-  const [profile, setProfile] = useState<GitHubData>({
-    user: {
-      name: "GitHub",
-      image: "",
+const repos: ReposAPIResponse[] = [
+  {
+    id: 0,
+    html_url: "",
+    name: ".github",
+    description: "Community health files for the @GitHub organizarion",
+    license: null,
+    forks_count: 2369,
+    stargazers_count: 730,
+    updated_at: new Date().toDateString(),
+  },
+  {
+    id: 1,
+    html_url: "",
+    name: "accessibility-alt-text-bot",
+    description:
+      "An action to remind users to add alt text on Issues, Pull Requests, and Discussions",
+    license: {
+      key: "Mit",
+      name: "Mit",
+      spdx_id: "MIT",
     },
-    bio: "How people build software.",
-    followers: "0",
-    following: "0",
-    location: "Narnia",
-    repostories: [],
-  });
+    forks_count: 7,
+    stargazers_count: 50,
+    updated_at: new Date().toDateString(),
+  },
+  {
+    id: 1,
+    html_url: "",
+    name: "accessibilityjs",
+    description: "Client side accessibility error scanner.",
+    license: {
+      key: "Mit",
+      name: "Mit",
+      spdx_id: "MIT",
+    },
+    forks_count: 72,
+    stargazers_count: 2181,
+    updated_at: new Date().toDateString(),
+  },
+  {
+    id: 3,
+    html_url: "",
+    name: "actions-cheat-sheet",
+    description: "A cheat sheet for GitHub Actions",
+    license: {
+      key: "Mit",
+      name: "Mit",
+      spdx_id: "MIT",
+    },
+    forks_count: 23,
+    stargazers_count: 194,
+    updated_at: new Date().toDateString(),
+  },
+];
+
+const INITIAL_STATE: GitHubData = {
+  user: {
+    name: "GitHub",
+    image: "",
+  },
+  bio: "How people build software.",
+  followers: "27839",
+  following: "0",
+  location: "San Francisco, CA",
+  repostories: repos,
+};
+
+export const GithubProfile = () => {
+  const [profile, setProfile] = useState<GitHubData>(INITIAL_STATE);
 
   const { user, bio, followers, following, location, repostories } = profile;
 
-  const handleCurrentUser = (user: User) => {
+  const handleCurrentUser = async (user: User) => {
+    const selectedUser = await getUserByName(user);
     setProfile({
       user: {
-        image: user.avatar_url,
-        name: user.login,
+        image: selectedUser.avatar_url,
+        name: selectedUser.login,
       },
-      bio: "Usuario seleccionado",
-      followers: "777",
-      following: "777",
-      location: "Narnia",
-      repostories: [],
+      bio: selectedUser.bio,
+      followers: selectedUser.followers.toString(),
+      following: selectedUser.following.toString(),
+      location: selectedUser.location,
+      repostories: selectedUser.repos,
     });
   };
 
@@ -74,11 +134,7 @@ export const GithubProfile = () => {
           <h4>Search an user...</h4>
         ) : (
           <>
-            <Repositories />
-
-            <button onClick={() => console.log("Hola")}>
-              <h4>View all repositories</h4>
-            </button>
+            <Repositories repostories={repostories} />
           </>
         )}
       </div>

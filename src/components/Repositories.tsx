@@ -1,12 +1,25 @@
+import { ReposAPIResponse } from "../interfaces/interfaces";
 import { Cart } from "./Cart";
 
-export const Repositories = () => {
+interface Props {
+  repostories: ReposAPIResponse[];
+}
+
+export const Repositories = ({ repostories }: Props) => {
   return (
-    <div className="grid-card">
-      <Cart />
-      <Cart />
-      <Cart />
-      <Cart />
-    </div>
+    <>
+      <div className="grid-card">
+        {repostories.map((repository) => (
+          <Cart
+            key={`${repository.name}-${repository.id}`}
+            repostory={repository}
+          />
+        ))}
+      </div>
+
+      <button onClick={() => console.log("Hola")}>
+        <h4>View all repositories</h4>
+      </button>
+    </>
   );
 };
