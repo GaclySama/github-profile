@@ -1,15 +1,22 @@
+import { useState } from "react";
 import { ReposAPIResponse } from "../interfaces/interfaces";
 import { Cart } from "./Cart";
 
 interface Props {
-  repostories: ReposAPIResponse[];
+  repositories: ReposAPIResponse[];
 }
 
-export const Repositories = ({ repostories }: Props) => {
+export const Repositories = ({ repositories }: Props) => {
+  const [viewAll, setViewAll] = useState(false);
+
+  const displayedRepositories = viewAll
+    ? repositories
+    : repositories.slice(0, 4);
+
   return (
     <>
       <div className="grid-card">
-        {repostories.map((repository) => (
+        {displayedRepositories.map((repository) => (
           <Cart
             key={`${repository.name}-${repository.id}`}
             repostory={repository}
@@ -17,9 +24,15 @@ export const Repositories = ({ repostories }: Props) => {
         ))}
       </div>
 
-      <button onClick={() => console.log("Hola")}>
-        <h4>View all repositories</h4>
-      </button>
+      {repositories.length > 4 && (
+        <button onClick={() => setViewAll((prev) => !prev)}>
+          {viewAll ? (
+            <h4>Hidden repositories</h4>
+          ) : (
+            <h4>View all repositories</h4>
+          )}
+        </button>
+      )}
     </>
   );
 };

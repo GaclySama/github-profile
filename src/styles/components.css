@@ -150,7 +150,7 @@
 
 
 
-@media (width < 650px) {
+@media (width < 750px) {
   .grid-card {
     grid-template-columns: 1fr;
   }

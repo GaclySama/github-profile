@@ -18,7 +18,7 @@ interface GitHubData {
   followers: string;
   following: string;
   location: string;
-  repostories: ReposAPIResponse[];
+  repositories: ReposAPIResponse[];
 }
 
 const repos: ReposAPIResponse[] = [
@@ -86,13 +86,13 @@ const INITIAL_STATE: GitHubData = {
   followers: "27839",
   following: "0",
   location: "San Francisco, CA",
-  repostories: repos,
+  repositories: repos,
 };
 
 export const GithubProfile = () => {
   const [profile, setProfile] = useState<GitHubData>(INITIAL_STATE);
 
-  const { user, bio, followers, following, location, repostories } = profile;
+  const { user, bio, followers, following, location, repositories } = profile;
 
   const handleCurrentUser = async (user: User) => {
     const selectedUser = await getUserByName(user);
@@ -105,7 +105,7 @@ export const GithubProfile = () => {
       followers: selectedUser.followers.toString(),
       following: selectedUser.following.toString(),
       location: selectedUser.location,
-      repostories: selectedUser.repos,
+      repositories: selectedUser.repos,
     });
   };
 
@@ -130,11 +130,11 @@ export const GithubProfile = () => {
         <h1>{user.name}</h1>
         <p>{bio} </p>
 
-        {repostories.length < 1 ? (
-          <h4>Search an user...</h4>
+        {repositories.length < 1 ? (
+          <h4>No repositories...</h4>
         ) : (
           <>
-            <Repositories repostories={repostories} />
+            <Repositories repositories={repositories} />
           </>
         )}
       </div>

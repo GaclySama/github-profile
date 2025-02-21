@@ -45,8 +45,10 @@ export const Cart = ({ repostory }: Props) => {
 
   return (
     <div className="card-container">
-      <h3>{name}</h3>
-      <p>{description || "No description available"}</p>
+      <div>
+        <h3 style={{ marginBottom: "5px" }}>{name}</h3>
+        <p>{description || "No description available"}</p>
+      </div>
 
       <div className="row">
         {itemsConfig.map(
