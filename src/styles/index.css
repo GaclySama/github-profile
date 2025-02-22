@@ -37,6 +37,12 @@ svg {
   width:  auto;
 }
 
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
 .row {
   display: flex;
   flex-direction: row;

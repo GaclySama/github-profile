@@ -67,14 +67,30 @@ export interface User {
   repos_url: string;
 }
 
-export interface CurrentUser {
-  login: string;
+// export interface CurrentUser {
+//   login: string;
+//   id: number;
+//   avatar_url: string;
+//   bio: string;
+//   location: string;
+//   html_url: string;
+//   followers: number;
+//   following: number;
+//   repos: ReposAPIResponse[];
+// }
+
+interface FullUserGitHub {
   id: number;
-  avatar_url: string;
-  bio: string;
-  location: string;
+  name: string;
+  image: string;
   html_url: string;
-  followers: number;
-  following: number;
-  repos: ReposAPIResponse[];
+}
+
+export interface FullUser {
+  user: FullUserGitHub;
+  bio: string;
+  followers: string;
+  following: string;
+  location: string;
+  repositories: ReposAPIResponse[];
 }

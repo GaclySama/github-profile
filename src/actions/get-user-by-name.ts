@@ -1,28 +1,30 @@
 import { githubApi } from "../config/api/githubApi";
 import {
-  CurrentUser,
+  FullUser,
   ReposAPIResponse,
   User,
   UserGithubAPIResponse,
 } from "../interfaces/interfaces";
 
-export const getUserByName = async (user: User): Promise<CurrentUser> => {
+export const getUserByName = async (user: User): Promise<FullUser> => {
   try {
     const [{ data }, { data: repos }] = await Promise.all([
       githubApi.get<UserGithubAPIResponse>(`/users/${user.login}`),
       githubApi.get<ReposAPIResponse[]>(`/users/${user.login}/repos`),
     ]);
 
-    const currentUser: CurrentUser = {
-      login: data.login,
-      id: data.id,
-      avatar_url: data.avatar_url,
+    const currentUser: FullUser = {
+      user: {
+        id: data.id,
+        html_url: data.html_url,
+        image: data.avatar_url,
+        name: data.login,
+      },
       bio: data.bio || "No have bio",
       location: data.location || "Narnia",
-      html_url: data.html_url,
-      followers: data.followers,
-      following: data.followers,
-      repos: repos.map((repo) => ({
+      followers: data.followers.toString(),
+      following: data.following.toString(),
+      repositories: repos.map((repo) => ({
         description: repo.description,
         forks_count: repo.forks_count,
         html_url: repo.html_url,
@@ -37,6 +39,6 @@ export const getUserByName = async (user: User): Promise<CurrentUser> => {
     return currentUser;
   } catch (error) {
     console.log(error);
-    throw new Error(`Error getting an user by name: ${name}`);
+    throw new Error(`Error getting an user by name: ${user.login}`);
   }
 };

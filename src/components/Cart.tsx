@@ -23,6 +23,7 @@ export const Cart = ({ repostory }: Props) => {
     name,
     stargazers_count,
     updated_at,
+    html_url,
   } = repostory;
 
   const itemsConfig: Items[] = [
@@ -43,10 +44,16 @@ export const Cart = ({ repostory }: Props) => {
     },
   ];
 
+  const handleClick = () => {
+    if (html_url) {
+      window.open(html_url);
+    }
+  };
+
   return (
-    <div className="card-container">
+    <button className="card-container" onClick={handleClick} role="option">
       <div>
-        <h3 style={{ marginBottom: "5px" }}>{name}</h3>
+        <h3 style={{ marginBottom: "10px" }}>{name}</h3>
         <p>{description || "No description available"}</p>
       </div>
 
@@ -63,6 +70,6 @@ export const Cart = ({ repostory }: Props) => {
 
         <p>updated {getDaysAgo(updated_at)} days ago</p>
       </div>
-    </div>
+    </button>
   );
 };

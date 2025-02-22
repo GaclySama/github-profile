@@ -25,7 +25,10 @@ export const Repositories = ({ repositories }: Props) => {
       </div>
 
       {repositories.length > 4 && (
-        <button onClick={() => setViewAll((prev) => !prev)}>
+        <button
+          className="view-all"
+          onClick={() => setViewAll((prev) => !prev)}
+        >
           {viewAll ? (
             <h4>Hidden repositories</h4>
           ) : (

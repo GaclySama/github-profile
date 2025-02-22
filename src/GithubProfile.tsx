@@ -4,22 +4,8 @@ import { IconGitHub } from "./components/icons/IconGithub";
 import { Pill } from "./components/Pill";
 import { Repositories } from "./components/Repositories";
 import { SearchBar } from "./components/SearchBar";
-import { ReposAPIResponse, User } from "./interfaces/interfaces";
+import type { FullUser, ReposAPIResponse, User } from "./interfaces/interfaces";
 import { getUserByName } from "./actions/get-user-by-name";
-
-interface UserGitHub {
-  name: string;
-  image: string;
-}
-
-interface GitHubData {
-  user: UserGitHub;
-  bio: string;
-  followers: string;
-  following: string;
-  location: string;
-  repositories: ReposAPIResponse[];
-}
 
 const repos: ReposAPIResponse[] = [
   {
@@ -77,10 +63,12 @@ const repos: ReposAPIResponse[] = [
   },
 ];
 
-const INITIAL_STATE: GitHubData = {
+const INITIAL_STATE: FullUser = {
   user: {
+    id: 0,
     name: "GitHub",
     image: "",
+    html_url: "https://github.com/",
   },
   bio: "How people build software.",
   followers: "27839",
@@ -90,23 +78,12 @@ const INITIAL_STATE: GitHubData = {
 };
 
 export const GithubProfile = () => {
-  const [profile, setProfile] = useState<GitHubData>(INITIAL_STATE);
+  const [profile, setProfile] = useState<FullUser>(INITIAL_STATE);
 
   const { user, bio, followers, following, location, repositories } = profile;
 
   const handleCurrentUser = async (user: User) => {
-    const selectedUser = await getUserByName(user);
-    setProfile({
-      user: {
-        image: selectedUser.avatar_url,
-        name: selectedUser.login,
-      },
-      bio: selectedUser.bio,
-      followers: selectedUser.followers.toString(),
-      following: selectedUser.following.toString(),
-      location: selectedUser.location,
-      repositories: selectedUser.repos,
-    });
+    setProfile(await getUserByName(user));
   };
 
   return (
@@ -118,8 +95,13 @@ export const GithubProfile = () => {
       <div className="second-container">
         <div className="container">
           <IconGitHub
-            style={{ border: "#20293A solid 8px", width: "25%" }}
+            style={{
+              border: "#20293A solid 8px",
+              width: "25%",
+              cursor: "pointer",
+            }}
             image={user.image}
+            html_url={user.html_url}
           />
 
           <Pill title="Followers" value={followers} />

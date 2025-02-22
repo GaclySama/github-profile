@@ -3,12 +3,12 @@ export const Header = () => {
     <picture className="background-container">
       <source
         media="(max-width: 600px)"
-        srcSet="src\assets\hero-image-github-profile-sm.jpg"
+        srcSet="hero-image-github-profile-sm.jpg"
       />
 
       <img
         className="image-background"
-        src="src\assets\hero-image-github-profile.jpg"
+        src="hero-image-github-profile.jpg"
         alt="header image"
       />
     </picture>
