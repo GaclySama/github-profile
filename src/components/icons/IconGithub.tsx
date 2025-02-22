@@ -1,7 +1,7 @@
 interface Props {
   style?: React.CSSProperties;
   image?: string;
-  html_url: string;
+  html_url?: string;
 }
 
 export const IconGitHub = ({ style, image, html_url = "" }: Props) => {
